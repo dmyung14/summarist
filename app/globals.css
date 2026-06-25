@@ -37,6 +37,15 @@ button:disabled {
   opacity: 0.65;
 }
 
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-left: 200px;
+  width: calc(100% - 200px);
+  transition: all 0.3s;
+}
+
 .row {
   max-width: 1070px;
   width: 100%;
