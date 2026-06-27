@@ -5,6 +5,7 @@ import type { ReactNode } from "react"
 import StoreProvider from "./components/StoreProvider";
 import AuthProvider from "./components/AuthProvider";
 import SubscriptionProvider from "./components/SubscriptionProvider";
+import LibraryProvider from "./components/LibraryProvider";
 
 
 const geistSans = localFont({
@@ -34,6 +35,7 @@ export default function RootLayout({
         <StoreProvider>
           <AuthProvider>
             <SubscriptionProvider />
+            <LibraryProvider />
             {children}
           </AuthProvider>
         </StoreProvider>

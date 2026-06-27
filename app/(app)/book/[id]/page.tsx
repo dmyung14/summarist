@@ -71,7 +71,7 @@ export default async function BookPage({ params }: Props) {
               bookId={id}
               subscriptionRequired={book.subscriptionRequired}
             />
-            <AddToLibraryBtn />
+            <AddToLibraryBtn book={book} />
             <div className={styles["inner-book__secondary--title"]}>
               What's it about?
             </div>

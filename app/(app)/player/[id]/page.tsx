@@ -30,12 +30,7 @@ export default async function PlayerPage({ params }: Props) {
           {book.summary}
         </div>
       </div>
-      <AudioPlayer
-        audioLink={book.audioLink}
-        imageLink={book.imageLink}
-        title={book.title}
-        author={book.author}
-      />
+      <AudioPlayer book={book} />
     </div>
   );
 }
