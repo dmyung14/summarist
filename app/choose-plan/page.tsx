@@ -70,8 +70,8 @@ export default function ChoosePlan() {
       const priceId = PRICES[selectedPlan];
       const checkoutUrl = await getCheckoutUrl(app, priceId);
       window.location.href = checkoutUrl;
-    } catch (err: any) {
-      setError(err.message ?? "Something went wrong. Please try again.");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -109,7 +109,7 @@ export default function ChoosePlan() {
                 <IoDocumentText />
               </figure>
               <div className={styles["plan__features--text"]}>
-                <b>Key ideas in few min</b>" with many books to read"
+                <b>Key ideas in few min</b>&quot; with many books to read&quot;
               </div>
             </div>
             <div className={styles.plan__features}>
@@ -117,7 +117,7 @@ export default function ChoosePlan() {
                 <RiPlantFill />
               </figure>
               <div className={styles["plan__features--text"]}>
-                <b>3 million</b>" people growing with Summarist everyday"
+                <b>3 million</b>&quot; people growing with Summarist everyday&quot;
               </div>
             </div>
             <div className={styles.plan__features}>
@@ -125,7 +125,7 @@ export default function ChoosePlan() {
                 <FaHandshake />
               </figure>
               <div className={styles["plan__features--text"]}>
-                <b>Precise recommendations</b>" collections curated by experts"
+                <b>Precise recommendations</b>&quot; collections curated by experts&quot;
               </div>
             </div>
           </div>

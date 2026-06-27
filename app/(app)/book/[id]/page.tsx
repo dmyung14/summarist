@@ -78,11 +78,11 @@ export default async function BookPage({ params }: Props) {
             />
             <AddToLibraryBtn book={book} />
             <div className={styles["inner-book__secondary--title"]}>
-              What's it about?
+              What&apos;s it about?
             </div>
             <div className={styles["inner-book__tags--wrapper"]}>
               {book.tags.map((tag) => (
-                <div className={styles["inner-book__tag"]}>{tag}</div>
+                <div key={tag} className={styles["inner-book__tag"]}>{tag}</div>
               ))}
             </div>
             <div className={styles["inner-book__book--description"]}>
