@@ -7,6 +7,8 @@ import { IoMicOutline } from "react-icons/io5";
 import { HiOutlineLightBulb } from "react-icons/hi";
 import ReadListenBtns from "@/app/components/ReadListenBtns";
 import AddToLibraryBtn from "@/app/components/AddToLibraryBtn";
+import BookDetailImage from "@/app/components/BookDetailImage";
+import AudioDuration from "@/app/components/AudioDuration";
 
 interface Props {
   params: { id: string };
@@ -28,7 +30,10 @@ export default async function BookPage({ params }: Props) {
       <div className={styles.container}>
         <div className={styles.inner__wrapper}>
           <div className={styles.inner__book}>
-            <div className={styles["inner-book__title"]}>{book.title}</div>
+            <div className={styles["inner-book__title"]}>
+              {book.title}
+              {book.subscriptionRequired && " (Premium)"}
+            </div>
             <div className={styles["inner-book__author"]}>{book.author}</div>
             <div className={styles["inner-book__sub--title"]}>
               {book.subTitle}
@@ -47,7 +52,7 @@ export default async function BookPage({ params }: Props) {
                   <div className={styles["inner-book__icon"]}>
                     <GoClock />
                   </div>
-                  <div className={styles["inner-book__key--ideas"]}>00:00</div>
+                  <AudioDuration audioLink={book.audioLink} className={styles["inner-book__key--ideas"]} />
                 </div>
                 <div className={styles["inner-book__description"]}>
                   <div className={styles["inner-book__icon"]}>
@@ -92,11 +97,10 @@ export default async function BookPage({ params }: Props) {
           </div>
           <div className={styles["inner-book--img-wrapper"]}>
             <figure className={styles["book__image--wrapper"]}>
-              <img
-                className={styles.book__image}
+              <BookDetailImage
                 src={book.imageLink}
                 alt={book.title}
-                style={{ display: "block" }}
+                className={styles.book__image}
               />
             </figure>
           </div>

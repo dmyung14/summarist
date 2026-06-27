@@ -1,0 +1,48 @@
+.book__image--skeleton {
+  width: 120px;
+  height: 100%;
+  margin: 0 auto;
+  border-radius: 4px;
+  background-color: #e0e0e0;
+}
+
+.selected__book--image-skeleton {
+  width: calc((100% / 3) * 2);
+  min-height: 196px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.for-you__recommended--books-link--skeleton {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  position: relative;
+  z-index: 10;
+  min-height: 300px;
+  scroll-snap-align: start;
+  max-width: 200px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+@media (max-width: 1200px) {
+  .selected__book--image-skeleton {
+    width: 100%;
+  }
+}
+
+.book__detail--image-skeleton {
+  width: 300px;
+  height: 300px;
+  min-width: 300px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+}
+
+.skeleton__line {
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}

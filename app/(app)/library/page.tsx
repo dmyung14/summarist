@@ -1,5 +1,6 @@
 "use client";
 import styles from "@/app/styles/Library.module.css";
+import skeletonStyles from "@/app/styles/SkeletonLoadingStates.module.css";
 import { useAppSelector } from "@/redux/hooks";
 import BookPill from "@/app/components/BookPill";
 import LoginSettings from "@/app/components/LoginSettings";
@@ -8,6 +9,8 @@ export default function LibraryPage() {
   const user = useAppSelector((state) => state.auth.user);
   const savedBooks = useAppSelector((state) => state.library.savedBooks);
   const finishedBooks = useAppSelector((state) => state.library.finishedBooks);
+  const savedBooksLoading = useAppSelector((state) => state.library.savedBooksLoading);
+  const finishedBooksLoading = useAppSelector((state) => state.library.finishedBooksLoading);
 
   if (!user) return <LoginSettings />;
 
@@ -15,9 +18,13 @@ export default function LibraryPage() {
     <div className={styles.row}>
       <div className={styles.container}>
         <div className={styles["for-you__title"]}>Saved Books</div>
-        <div className={styles["for-you__sub--title"]}>
-          {savedBooks.length} {savedBooks.length === 1 ? "item" : "items"}
-        </div>
+        {savedBooksLoading ? (
+          <div className={skeletonStyles["skeleton__line"]} style={{ width: "200px", height: "24px" }} />
+        ) : (
+          <div className={styles["for-you__sub--title"]}>
+            {savedBooks.length} {savedBooks.length === 1 ? "item" : "items"}
+          </div>
+        )}
 
         {savedBooks.length > 0 ? (
           <div className={styles["for-you__recommended--books"]}>
@@ -37,9 +44,13 @@ export default function LibraryPage() {
         )}
 
         <div className={styles["for-you__title"]}>Finished Books</div>
-        <div className={styles["for-you__sub--title"]}>
-          {finishedBooks.length} {finishedBooks.length === 1 ? "item" : "items"}
-        </div>
+        {finishedBooksLoading ? (
+          <div className={skeletonStyles["skeleton__line"]} style={{ width: "200px", height: "24px" }} />
+        ) : (
+          <div className={styles["for-you__sub--title"]}>
+            {finishedBooks.length} {finishedBooks.length === 1 ? "item" : "items"}
+          </div>
+        )}
 
         {finishedBooks.length > 0 ? (
           <div className={styles["for-you__recommended--books"]}>

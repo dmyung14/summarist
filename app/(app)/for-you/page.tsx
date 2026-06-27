@@ -1,4 +1,5 @@
 import BookPill from "@/app/components/BookPill";
+import SelectedBookImage from "@/app/components/SelectedBookImage";
 import type { Book } from "@/app/types/book";
 import styles from "@/app/styles/ForYou.module.css";
 import { BsFillPlayCircleFill } from "react-icons/bs";
@@ -37,12 +38,15 @@ export default async function ForYouPage() {
             <div className={styles["selected__book--line"]} />
             <div className={styles["selected__book--content"]}>
               <figure className={styles["book__image--wrapper"]}>
-                <img
-                  className={styles.book__image}
+                <SelectedBookImage
                   src={selectedBook.imageLink}
                   alt={selectedBook.title}
+                  className={styles.book__image}
                 />
               </figure>
+
+              <div className={styles[""]}></div>
+
               <div className={styles["selected__book--text"]}>
                 <div className={styles["selected__book--title"]}>
                   {selectedBook.title}

@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import styles from "@/app/styles/Search.module.css";
 import dropdownStyles from "@/app/styles/SearchLoadingState.module.css";
 import { IoMdSearch } from "react-icons/io";
@@ -12,6 +13,11 @@ const Search = () => {
   const [results, setResults] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setQuery("");
+  }, [pathname]);
 
   useEffect(() => {
     if (!query.trim()) {
