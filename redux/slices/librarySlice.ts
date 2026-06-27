@@ -4,11 +4,15 @@ import { Book } from "@/app/types/book";
 interface LibraryState {
   savedBooks: Book[];
   finishedBooks: Book[];
+  savedBooksLoading: boolean;
+  finishedBooksLoading: boolean;
 }
 
 const initialState: LibraryState = {
   savedBooks: [],
   finishedBooks: [],
+  savedBooksLoading: true,
+  finishedBooksLoading: true,
 };
 
 const librarySlice = createSlice({
@@ -17,13 +21,17 @@ const librarySlice = createSlice({
   reducers: {
     setSavedBooks: (state, action: PayloadAction<Book[]>) => {
       state.savedBooks = action.payload;
+      state.savedBooksLoading = false;
     },
     setFinishedBooks: (state, action: PayloadAction<Book[]>) => {
       state.finishedBooks = action.payload;
+      state.finishedBooksLoading = false;
     },
     resetLibrary: (state) => {
       state.savedBooks = [];
       state.finishedBooks = [];
+      state.savedBooksLoading = true;
+      state.finishedBooksLoading = true;
     },
     // kept for direct optimistic updates if needed
     addSavedBook: (state, action: PayloadAction<Book>) => {

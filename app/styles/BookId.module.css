@@ -36,12 +36,6 @@
   font-size: 32px;
 }
 
-.inner-book__sub--title {
-  font-size: 20px;
-  color: #032b41;
-  margin-bottom: 16px;
-  font-weight: 300;
-}
 
 .inner-book__author,
 .inner-book__title {

@@ -16,6 +16,7 @@ export default function ReadListenBtns({
   subscriptionRequired,
 }: Props) {
   const user = useAppSelector((state) => state.auth.user);
+  const isPremium = useAppSelector((state) => state.auth.isPremium);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -24,7 +25,7 @@ export default function ReadListenBtns({
       dispatch(openModal());
       return;
     }
-    if (subscriptionRequired) {
+    if (subscriptionRequired && !isPremium) {
       router.push("/choose-plan");
       return;
     }
