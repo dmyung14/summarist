@@ -1,0 +1,43 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e5]:
+      - figure
+      - generic [ref=e8]:
+        - textbox "Search for books" [ref=e9]
+        - img [ref=e11]
+    - generic [ref=e15]:
+      - generic [ref=e16]:
+        - link "For you" [ref=e17] [cursor=pointer]:
+          - /url: /for-you
+          - img [ref=e20]
+          - generic [ref=e22]: For you
+        - link "My Library" [ref=e23] [cursor=pointer]:
+          - /url: /library
+          - img [ref=e26]
+          - generic [ref=e28]: My Library
+        - generic [ref=e29]:
+          - img [ref=e32]
+          - generic [ref=e36]: Highlights
+        - generic [ref=e37]:
+          - img [ref=e40]
+          - generic [ref=e42]: Search
+      - generic [ref=e43]:
+        - link "Settings" [ref=e44] [cursor=pointer]:
+          - /url: /settings
+          - img [ref=e47]
+          - generic [ref=e49]: Settings
+        - generic [ref=e50]:
+          - img [ref=e53]
+          - generic [ref=e56]: Help & Support
+        - generic [ref=e57] [cursor=pointer]:
+          - img [ref=e60]
+          - generic [ref=e63]: Login
+    - generic [ref=e66]:
+      - generic [ref=e67]: Selected just for you
+      - generic [ref=e69]:
+        - generic [ref=e70]: Recommended For You
+        - generic [ref=e71]: We think you’ll like these
+      - generic [ref=e103]:
+        - generic [ref=e104]: Suggested Books
+        - generic [ref=e105]: Browse those books
+  - alert [ref=e137]
