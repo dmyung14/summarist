@@ -1,21 +1,32 @@
 "use client";
-import { useState } from "react";
 import { FaBookmark, FaRegBookmark } from "react-icons/fa";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { openModal } from "@/redux/slices/authSlice";
+import { saveBook, unsaveBook } from "@/app/lib/userBooks";
 import styles from "@/app/styles/BookId.module.css";
+import type { Book } from "@/app/types/book";
 
-export default function AddToLibraryBtn() {
-  const [isSaved, setIsSaved] = useState(false);
+interface Props {
+  book: Book;
+}
+
+export default function AddToLibraryBtn({ book }: Props) {
   const user = useAppSelector((state) => state.auth.user);
+  const savedBooks = useAppSelector((state) => state.library.savedBooks);
   const dispatch = useAppDispatch();
 
-  function handleClick() {
+  const isSaved = savedBooks.some((b) => b.id === book.id);
+
+  async function handleClick() {
     if (!user) {
       dispatch(openModal());
       return;
     }
-    setIsSaved((prev) => !prev);
+    if (isSaved) {
+      await unsaveBook(user.uid!, book.id);
+    } else {
+      await saveBook(user.uid!, book);
+    }
   }
 
   return (

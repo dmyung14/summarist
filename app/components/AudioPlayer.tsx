@@ -3,12 +3,12 @@ import { useRef, useState, useEffect } from "react";
 import { BsPlayFill, BsPauseFill } from "react-icons/bs";
 import { RiReplay10Fill, RiForward10Fill } from "react-icons/ri";
 import styles from "@/app/styles/PlayerId.module.css";
+import { useAppSelector } from "@/redux/hooks";
+import { finishBook } from "@/app/lib/userBooks";
+import type { Book } from "@/app/types/book";
 
 interface Props {
-  audioLink: string;
-  imageLink: string;
-  title: string;
-  author: string;
+  book: Book;
 }
 
 function formatTime(seconds: number): string {
@@ -18,7 +18,8 @@ function formatTime(seconds: number): string {
   return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 }
 
-export default function AudioPlayer({ audioLink, imageLink, title, author }: Props) {
+export default function AudioPlayer({ book }: Props) {
+  const user = useAppSelector((state) => state.auth.user);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
@@ -32,14 +33,16 @@ export default function AudioPlayer({ audioLink, imageLink, title, author }: Pro
       if (!isNaN(audio.duration)) setDuration(audio.duration);
     };
     const onTimeUpdate = () => setCurrentTime(audio.currentTime);
-    const onEnded = () => setIsPlaying(false);
+    const onEnded = () => {
+      setIsPlaying(false);
+      if (user?.uid) finishBook(user.uid, book);
+    };
 
     audio.addEventListener("durationchange", onDurationChange);
     audio.addEventListener("loadeddata", onDurationChange);
     audio.addEventListener("timeupdate", onTimeUpdate);
     audio.addEventListener("ended", onEnded);
 
-    // audio may already be loaded (e.g. cached)
     if (audio.readyState >= 1 && !isNaN(audio.duration)) {
       setDuration(audio.duration);
     }
@@ -81,21 +84,21 @@ export default function AudioPlayer({ audioLink, imageLink, title, author }: Pro
 
   return (
     <div className={styles.audio__wrapper}>
-      <audio ref={audioRef} src={audioLink} preload="metadata" />
+      <audio ref={audioRef} src={book.audioLink} preload="metadata" />
       <div className={styles["audio__track--wrapper"]}>
         <figure className={styles["audio__track--image-mask"]}>
           <figure className={styles["book__image--wrapper"]}>
             <img
               className={styles.book__image}
-              src={imageLink}
-              alt={title}
+              src={book.imageLink}
+              alt={book.title}
               style={{ display: "block" }}
             />
           </figure>
         </figure>
         <div className={styles["audio__track--details-wrapper"]}>
-          <div className={styles["audio__track--title"]}>{title}</div>
-          <div className={styles["audio__track--author"]}>{author}</div>
+          <div className={styles["audio__track--title"]}>{book.title}</div>
+          <div className={styles["audio__track--author"]}>{book.author}</div>
         </div>
       </div>
 
