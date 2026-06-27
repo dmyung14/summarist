@@ -21,6 +21,7 @@ interface AuthState {
   loading: boolean;
   error: string | null;
   isModalOpen: boolean;
+  isPremium: boolean;
 }
 
 const initialState: AuthState = {
@@ -28,6 +29,7 @@ const initialState: AuthState = {
   loading: false,
   error: null,
   isModalOpen: false,
+  isPremium: false,
 };
 
 export const loginWithEmail = createAsyncThunk(
@@ -122,6 +124,9 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setIsPremium: (state, action) => {
+      state.isPremium = action.payload;
+    },
     openModal: (state) => {
       state.isModalOpen = true;
     },
@@ -178,5 +183,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, openModal, closeModal, clearError } = authSlice.actions;
+export const { setUser, setIsPremium, openModal, closeModal, clearError } = authSlice.actions;
 export default authSlice.reducer;

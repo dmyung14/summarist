@@ -4,6 +4,7 @@ import "./globals.css";
 import type { ReactNode } from "react"
 import StoreProvider from "./components/StoreProvider";
 import AuthProvider from "./components/AuthProvider";
+import SubscriptionProvider from "./components/SubscriptionProvider";
 
 
 const geistSans = localFont({
@@ -31,7 +32,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <StoreProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <SubscriptionProvider />
+            {children}
+          </AuthProvider>
         </StoreProvider>
       </body>
     </html>
