@@ -7,8 +7,13 @@ import { IoMdSearch } from "react-icons/io";
 import { Book } from "@/app/types/book";
 import SearchLoading from "./SearchLoading";
 import SkeletonLoading from "./SkeletonLoading";
+import { AiOutlineMenu } from "react-icons/ai";
 
-const Search = () => {
+interface SearchProps {
+  onMenuToggle: () => void;
+}
+
+const Search = ({ onMenuToggle }: SearchProps) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<Book[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +36,7 @@ const Search = () => {
     const timer = setTimeout(async () => {
       try {
         const res = await fetch(
-          `https://us-central1-summaristt.cloudfunctions.net/getBooksByAuthorOrTitle?search=${encodeURIComponent(query)}`
+          `https://us-central1-summaristt.cloudfunctions.net/getBooksByAuthorOrTitle?search=${encodeURIComponent(query)}`,
         );
         const data: Book[] = await res.json();
         setResults(data);
@@ -47,7 +52,10 @@ const Search = () => {
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
         setQuery("");
       }
     };
@@ -75,10 +83,13 @@ const Search = () => {
               </div>
             </div>
           </div>
+          <div className={styles["sidebar__toggle--btn"]} onClick={onMenuToggle}>
+            <AiOutlineMenu />
+          </div>
         </div>
 
-        {showDropdown && (
-          isLoading ? (
+        {showDropdown &&
+          (isLoading ? (
             <SkeletonLoading />
           ) : (
             <div className={dropdownStyles["search__books--wrapper"]}>
@@ -87,13 +98,18 @@ const Search = () => {
                   <SearchLoading key={book.id} book={book} />
                 ))
               ) : (
-                <div style={{ padding: "16px", color: "#6b757b", fontSize: "14px" }}>
+                <div
+                  style={{
+                    padding: "16px",
+                    color: "#6b757b",
+                    fontSize: "14px",
+                  }}
+                >
                   No results found
                 </div>
               )}
             </div>
-          )
-        )}
+          ))}
       </div>
     </div>
   );

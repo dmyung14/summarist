@@ -18,7 +18,11 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { openModal } from "@/redux/slices/authSlice";
 import { logout } from "@/redux/slices/authSlice";
 
-const Navbar = () => {
+interface NavbarProps {
+  isOpen?: boolean;
+}
+
+const Navbar = ({ isOpen = false }: NavbarProps) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.auth.user);
   const pathname = usePathname();
@@ -28,7 +32,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={style.nav}>
+      <nav className={`${style.nav} ${isOpen ? style["sidebar--opened"] : ""}`}>
         <div className={style.navbar__logo}>
           <Image src={Logo} alt="Summarist Logo" />
         </div>
